@@ -4,11 +4,17 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     private Coroutine destroyRoutine = null;
+    [SerializeField] private GameObject hitParticlePrefab;
 
     private void OnCollisionEnter(Collision other)
     {
         if (destroyRoutine != null) return;
         if (!other.gameObject.CompareTag("Ball")) return;
+
+        ContactPoint contact = other.contacts[0];
+        Quaternion rotation = Quaternion.LookRotation(contact.normal);
+        Instantiate(hitParticlePrefab, transform.position, rotation);
+
         destroyRoutine = StartCoroutine(DestroyWithDelay());
     }
 

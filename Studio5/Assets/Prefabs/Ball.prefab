@@ -100,6 +100,8 @@ MonoBehaviour:
   maxBallBounceBackSpeed: 10
   ballAnchor: {fileID: 0}
   rb: {fileID: 8959031048966596842}
+  paddleHitPrefab: {fileID: 6698803860044259466, guid: f7f7f742f20daf24ebaeb10f74043685, type: 3}
+  wallHitPrefab: {fileID: 343401065326961466, guid: b9caa8a15cec33a41b927312e819f3ee, type: 3}
 --- !u!1 &4625805382739171240
 GameObject:
   m_ObjectHideFlags: 0
