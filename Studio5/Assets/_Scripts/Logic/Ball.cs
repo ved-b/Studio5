@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform ballAnchor;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject paddleHitPrefab;
+    [SerializeField] private GameObject wallHitPrefab;
 
     private bool isBallActive;
 
@@ -22,6 +24,17 @@ public class Ball : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.AddForce(directionToFire * returnSpeed, ForceMode.Impulse);
+
+            ContactPoint contact = other.contacts[0];
+            Quaternion rotation = Quaternion.LookRotation(contact.normal);
+            Instantiate(paddleHitPrefab, contact.point, rotation);
+        }
+
+        if(other.gameObject.CompareTag("Environment")) {
+            ContactPoint contact = other.contacts[0];
+            Quaternion rotation = Quaternion.LookRotation(contact.normal, -Vector3.forward);
+            // rotation *= Quaternion.Euler(90f, 0, 0);
+            Instantiate(wallHitPrefab, contact.point, rotation);
         }
     }
 
