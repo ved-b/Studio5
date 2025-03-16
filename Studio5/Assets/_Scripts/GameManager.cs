@@ -5,6 +5,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField] private int maxLives = 3;
     [SerializeField] private Ball ball;
     [SerializeField] private Transform bricksContainer;
+    [SerializeField] private AudioClip brickDestroyedSound;
 
     private int currentBrickCount;
     private int totalBrickCount;
@@ -30,6 +31,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     public void OnBrickDestroyed(Vector3 position)
     {
         // fire audio here
+        AudioManager.Instance.PlaySound(brickDestroyedSound);
         // implement particle effect here
         // add camera shake here
         currentBrickCount--;

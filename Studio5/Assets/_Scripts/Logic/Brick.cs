@@ -4,7 +4,11 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     private Coroutine destroyRoutine = null;
+
     [SerializeField] private GameObject hitParticlePrefab;
+
+    public int brickScore = 1;
+
 
     private void OnCollisionEnter(Collision other)
     {
@@ -16,6 +20,7 @@ public class Brick : MonoBehaviour
         Instantiate(hitParticlePrefab, transform.position, rotation);
 
         destroyRoutine = StartCoroutine(DestroyWithDelay());
+        ScoreManager.Instance.AddScore(brickScore);
     }
 
     private IEnumerator DestroyWithDelay()
